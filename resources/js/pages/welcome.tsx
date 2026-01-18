@@ -8,7 +8,7 @@ export default function Welcome({
 }) {
     return (
         <Layout title='Welcome' canRegister={canRegister}>
-            <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+            <div className="max-w-[400px] ml-auto flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                 <h1 className="mb-1 font-medium">
                     Shopping cart
                 </h1>
@@ -84,21 +84,9 @@ export default function Welcome({
                         </span>
                     </li>
                 </ul>
-
-                {/* <ul className="flex gap-3 text-sm leading-normal">
-                    <li>
-                        <a
-                            href="https://cloud.laravel.com"
-                            target="_blank"
-                            className="inline-block rounded-sm border border-black bg-[#1b1b18] px-5 py-1.5 text-sm leading-normal text-white hover:border-black hover:bg-black dark:border-[#eeeeec] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:border-white dark:hover:bg-white"
-                        >
-                            Deploy now
-                        </a>
-                    </li>
-                </ul> */}
             </div>
 
-            <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#1D0002]">
+            <div className="mr-auto relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#1D0002]">
                 <img src="https://t4.ftcdn.net/jpg/14/64/22/71/360_F_1464227120_NAaeukTQE6JKY98w5xmjvAtW4vQa4DSJ.jpg"
                     alt="cart" width="100%" height="100%" />
             </div>

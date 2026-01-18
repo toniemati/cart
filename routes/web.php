@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -10,22 +12,17 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', fn() => Inertia::render('dashboard'))->name('dashboard');
 
-    Route::get('shop', function () {
-        return Inertia::render('shop', [
-            'canRegister' => Features::enabled(Features::registration()),
-        ]);
-    })->name('shop');
+    Route::get('shop', [ShopController::class, 'index'])->name('shop');
 
-    Route::get('cart', function () {
-        return Inertia::render('cart', [
-            'canRegister' => Features::enabled(Features::registration()),
-        ]);
-    })->name('cart');
+    Route::prefix('cart')->group(function () {
+        Route::get('', [CartController::class, 'index'])->name('cart');
+        Route::post('add/{product}', [CartController::class, 'add'])->name('cart.add');
+        Route::post('{product}/update', [CartController::class, 'update'])->name('cart.update');
+        Route::post('{id}/order', [CartController::class, 'order'])->name('cart.order');
+    });
 });
 
 require __DIR__ . '/settings.php';

@@ -51,15 +51,8 @@ class User extends Authenticatable
         ];
     }
 
-    protected static function booted()
+    protected function cart(): HasOne
     {
-        static::created(function (User $user) {
-            $user->cart()->create([]);
-        });
-    }
-
-    protected function cart()
-    {
-        return $this->hasOne(Cart::class);
+        return $this->hasOne(Cart::class)->where('status', 'active');
     }
 }

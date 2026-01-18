@@ -31,10 +31,6 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $input['password'],
         ]);
 
-        Cart::create([
-            'user_id' => $user->id
-        ]);
-
         return $user;
     }
 }
