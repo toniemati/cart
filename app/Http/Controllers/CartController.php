@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateItemQuantityRequest;
 use App\Models\Cart;
 use App\Services\CartService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -22,6 +23,15 @@ class CartController extends Controller
         return Inertia::render('cart', [
             'canRegister' => Features::enabled(Features::registration()),
             'cart' => Cart::where('user_id', Auth::id())->where('status', 'active')->with(['items.product', 'user'])->first()
+        ]);
+    }
+
+    public function count(): JsonResponse
+    {
+        $itemsCount = Auth::user()->cart->items()->count();
+
+        return response()->json([
+            'count' => $itemsCount
         ]);
     }
 

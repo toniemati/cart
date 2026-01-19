@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('cart')->group(function () {
         Route::get('', [CartController::class, 'index'])->name('cart');
+        Route::get('items/count', [CartController::class, 'count'])->name('cart.items.count');
         Route::post('add/{product}', [CartController::class, 'add'])->name('cart.add');
         Route::post('{product}/update', [CartController::class, 'update'])->name('cart.update');
         Route::post('{id}/order', [CartController::class, 'order'])->name('cart.order');

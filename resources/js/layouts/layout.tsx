@@ -1,7 +1,8 @@
 import { Head, Link, usePage } from '@inertiajs/react'
 import { LayoutDashboard, ShoppingCart, Store } from 'lucide-react'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
+import { useCart } from '@/contexts/CartContext'
 import { cart, dashboard, login, register, shop } from '@/routes'
 import { type SharedData } from '@/types'
 
@@ -12,6 +13,11 @@ type LayoutProps = {
 
 export default function Layout({ children, title, canRegister }: LayoutProps) {
     const { auth } = usePage<SharedData>().props
+    const { cartItemsCount, fetchCartItemsCount } = useCart()
+
+    useEffect(() => {
+        fetchCartItemsCount()
+    })
 
     return (
         <>
@@ -38,9 +44,15 @@ export default function Layout({ children, title, canRegister }: LayoutProps) {
 
                                 <Link
                                     href={cart()}
-                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                                    className="relative inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                                 >
                                     <ShoppingCart />
+
+                                    {cartItemsCount ? (
+                                        <div className='absolute right-[-10%] top-[-25%] inline-flex items-center justify-center rounded-full bg-red-500 px-1 py-0.5 text-xs font-bold text-white'>
+                                            {cartItemsCount}
+                                        </div>
+                                    ) : null}
                                 </Link>
 
                                 <Link

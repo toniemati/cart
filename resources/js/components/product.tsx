@@ -2,6 +2,7 @@ import { router } from '@inertiajs/react'
 import { Minus, Plus, Trash } from 'lucide-react'
 import { useState } from 'react'
 
+import { useCart } from '@/contexts/CartContext'
 import { CartItem } from '@/pages/cart'
 
 import { Button } from './ui/button'
@@ -17,6 +18,7 @@ export type Product = {
 
 export default function Product({ product, editable, item }: { product: Product, editable?: boolean, item?: CartItem }) {
     const [inCart, setInCart] = useState(product.in_cart)
+    const { fetchCartItemsCount } = useCart()
 
     let quantity = item?.quantity ?? 0
 
@@ -25,6 +27,7 @@ export default function Product({ product, editable, item }: { product: Product,
         router.post(`cart/add/${productId}`, {}, {
             onSuccess: () => {
                 setInCart(true)
+                fetchCartItemsCount()
                 alert('Product added to your cart')
             }
         })
